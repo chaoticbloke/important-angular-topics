@@ -1,0 +1,69 @@
+<h3 class="text-center mt-5">{{ title }}</h3>
+<div class="text-center">with Angular validations</div>
+<form
+  style="width: 20vw; margin: auto"
+  #myData="ngForm"
+  (ngSubmit)="handleSubmit(myData)"
+  ngNativeValidate
+>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      placeholder="Enter email"
+      ngModel
+      name="email"
+      required
+      email
+      #email="ngModel"
+    />
+    <small
+      *ngIf="!email.valid && email.touched"
+      id="emailHelp"
+      class="text-danger"
+      >Please enter valid email!</small
+    >
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="exampleInputPassword1"
+      placeholder="Password"
+      ngModel
+      name="password"
+      #pass="ngModel"
+      required
+    />
+    <small
+      *ngIf="!pass.valid && pass.touched"
+      id="emailHelp"
+      class="text-danger"
+      >Enter your password!</small
+    >
+  </div>
+  <div class="form-group mt-2">
+    <label for="cars">Choose an Option</label>
+
+    <select
+      name="options"
+      id="cars"
+      class="form-control"
+      ngModel
+      [ngModel]="defaultSelect"
+    >
+      <option *ngFor="let item of selectOptions">{{ item }}</option>
+    </select>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-primary mt-5"
+    [ngStyle]="{ cursor: !myData.form.valid ? 'not-allowed' : 'pointer' }"
+  >
+    Submit
+  </button>
+</form>
